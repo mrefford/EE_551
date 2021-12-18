@@ -180,63 +180,48 @@ text = file.read()
 file.close()
 print("As I clean this file, I will show you the first ten words with each step so you can see me in action...")
 
-#split into words by white space
-print('split into words by white space')
+print("Frist I have split into words by white space")
 words = text.split()
 print(words[:10])
 
-# split into sentences with nltk
-print('split into sentences with nltk')
+print("Next into sentences with nltk")
 from nltk import sent_tokenize
 sentences = sent_tokenize(text)
 print(sentences[:10])
 
-# split into words with nltk
-print('split into words with nltk')
+print("Now split the sentences into words...")
 from nltk.tokenize import word_tokenize
 tokens = word_tokenize(text)
 print(tokens[:10])
 
-# remove all tokens that are not alphabetic with nltk
-print('remove all tokens that are not alphabetic with nltk')
+print("Now I need to remove all items that are not alphabetic in nature.")
 words = [word for word in tokens if word.isalpha()]
 print(words[:10])
 
-#Filter out Stop Words
-print('Filter out Stop Words')
-from nltk.corpus import stopwords
-stop_words = stopwords.words('english')
-#print(stop_words)
-
-# convert to lower case
 print("Converting everything to lower case (NO YELLING!)")
 tokens = [w.lower() for w in tokens]
 print(words[:10])
 
-# remove punctuation from each word
 print("Getting rid of punctuation from each word")
 import string
 table = str.maketrans('', '', string.punctuation)
 stripped = [w.translate(table) for w in tokens]
 print(words[:10])
 
-# remove remaining tokens that are not alphabetic
-print("Remove remaining items that are not alphabetic")
+print("Remove remaining items that are not alphabetic.")
 words = [word for word in stripped if word.isalpha()]
 print(words[:10])
 
-# filter out stop words
-print("Removing common words")
+print("Removing those common words...")
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
 words = [w for w in words if not w in stop_words]
 print(words[:10])
 
-# filter my own stop words that are not useful for NTSB data, like airplane
 myfile = open('stopwords_en.txt', 'rt')
 mytext = myfile.read()
 myfile.close()
-print("Time to remove my own stop words!")
+print("... and words that are common for aircraft!")
 words = [w for w in words if not w in mytext]
 print(words[:10])
 
